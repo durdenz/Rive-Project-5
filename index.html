@@ -6,19 +6,34 @@
     <title>Rive Hello World</title>
   </head>
   <body>
-    <canvas id="canvas" width="500" height="500"></canvas>
+    <canvas id="canvas" width="1024" height="768"></canvas>
 
     <script src="https://unpkg.com/@rive-app/canvas@2.20.0"></script>
     <script>
       const r = new rive.Rive({
-        src: "./sophia_iii.riv",
+        src: "./TEST_TextInput_Tacometer.riv",
         canvas: document.getElementById("canvas"),
         autoplay: true,
-        stateMachines: "bumpy",
+        stateMachines: "State Machine 1",
         onLoad: () => {
           r.resizeDrawingSurfaceToCanvas();
+          r.setTextRunValue("V_Speed_Run", "0 mph");
         },
+        onStateChange: (e) => {
+            console.log("Event %s", e.data[0]);
+            speed_str = (Math.floor(Math.random()*100)).toString();
+            r.setTextRunValue("V_Speed_Run", speed_str);
+        }
       });
+
+    function v_refresh() {
+        console.log("Timer Loop");
+        speed_str = (Math.floor(Math.random()*100)).toString();
+        r.setTextRunValue("V_Speed_Run", speed_str);
+    }
+    
+    // Call Refresh every 1000 Milliseconds
+    window.setInterval(v_refresh, 1000);
     </script>
   </body>
 </html>
