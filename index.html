@@ -17,19 +17,19 @@
         stateMachines: "State Machine 1",
         onLoad: () => {
           r.resizeDrawingSurfaceToCanvas();
-          r.setTextRunValue("speed", "1");
+          r.setTextRunValue("Speed", "1");
         },
         onStateChange: (e) => {
             console.log("Event %s", e.data[0]);
             speed_str = (Math.floor(Math.random()*100)).toString();
-            r.setTextRunValue("speed", speed_str);
+            r.setTextRunValue("Speed", speed_str);
         }
       });
 
     function v_refresh() {
         console.log("Timer Loop");
         speed_str = (Math.floor(Math.random()*100)).toString();
-        r.setTextRunValue("speed", speed_str);
+        r.setTextRunValue("Speed", speed_str);
     }
     
     // Call Refresh every 1000 Milliseconds
