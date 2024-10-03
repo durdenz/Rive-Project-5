@@ -16,20 +16,30 @@
         autoplay: true,
         stateMachines: "State Machine 1",
         onLoad: () => {
+          const inputs = r.stateMachineInputs('State Machine 1');
+          console.log(inputs);
+          const SpeedInput = inputs.find(i => i.name === 'Speed');
+          console.log('SpeedInput:'+SpeedInput);
+          SpeedInput.value = 88;
           r.resizeDrawingSurfaceToCanvas();
-          r.setTextRunValue("Speed", "1");
         },
         onStateChange: (e) => {
             console.log("Event %s", e.data[0]);
-            speed_str = (Math.floor(Math.random()*100)).toString();
-            r.setTextRunValue("Speed", speed_str);
+            // const inputs = r.stateMachineInputs('State Machine 1');
+            // const SpeedInput = inputs.find(i => i.name === 'Speed');
+            // speed = (Math.floor(Math.random()*100));
+            // SpeedInput.value = speed;
+            // r.setTextRunValue("Speed", speed_str);
         }
       });
 
     function v_refresh() {
         console.log("Timer Loop");
-        speed_str = (Math.floor(Math.random()*100)).toString();
-        r.setTextRunValue("Speed", speed_str);
+        const inputs = r.stateMachineInputs('State Machine 1');
+        const SpeedInput = inputs.find(i => i.name === 'Speed');
+        speed = (Math.floor(Math.random()*100));
+        SpeedInput.value = speed;
+        // r.setTextRunValue("Speed", speed_str);
     }
     
     // Call Refresh every 1000 Milliseconds

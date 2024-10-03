@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rive Hello World</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1024" height="768"></canvas>
+
+    <script src="https://unpkg.com/@rive-app/canvas"></script>
+    <script>
+      async function loadRiveFile() {
+        const riveFile = await rive.Rive.fromURL("./speedo_demo_001.riv");
+        const artboard = riveFile.defaultArtboard();
+        const canvas = document.getElementById("canvas");
+        const renderer = new rive.CanvasRenderer(canvas);
+
+        riveFile.renderer = renderer;
+
+        // Find the joystick
+        const joystick = artboard.find("Joystick");
+
+        // Update loop
+        function update() {
+          riveFile.advance(0.016); // Advance the animation
+          renderer.draw(artboard);
+          requestAnimationFrame(update);
+        }
+
+        update();
+      }
+
+      loadRiveFile();
+    </script>
+  </body>
+</html>
